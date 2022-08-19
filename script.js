@@ -6,6 +6,7 @@ pizzaJson.map((item, index) => {
     let pizzaItem = c('.models .pizza-item').cloneNode(true);
 
     // Preencher as informações em pizzaitem
+    pizzaItem.setAttribute('data-key', index);
     pizzaItem.querySelector('.pizza-item--img img').src =innerHTML = item.img;
     c('.pizza-area').append(pizzaItem);
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`;
@@ -13,6 +14,11 @@ pizzaJson.map((item, index) => {
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
     pizzaItem.querySelector('a').addEventListener('click',(e) => {
         e.preventDefault();  
+        let key = e.target.closest('.pizza-item').getAttribute('data-key');
+        
+        c('.pizzaBig img').src = pizzaJson[key].img;
+        c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
+        c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
         
         c('.pizzaWindowArea').style.opacity = 0;
         c('.pizzaWindowArea').style.display = "flex";
